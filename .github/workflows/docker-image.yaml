@@ -1,5 +1,5 @@
 
-name: build and push Docker Images for multiple platforms
+name: Docker Images
 
 
 on:
@@ -9,7 +9,6 @@ on:
   workflow_dispatch:
 
 jobs:
-
   build_and_push:
     runs-on: ubuntu-latest
 
@@ -26,22 +25,16 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-    - name: Docker meta
-      id: meta
-      uses: docker/metadata-action@v5
-      with:
-        images: ${{ github.repository }}
         
     - name: Build and push
       uses: docker/build-push-action@v5
       with:
         context: .
         file: ./Dockerfile
-        platforms: linux/amd64,linux/arm64,liunux/arm64/v8
+        platforms: linux/amd64,linux/arm64
         push: true
         tags: ${{ github.repository }}:latest
         cache-from: type=local,src=/tmp/.buildx-cache
-        cache-to: type=local,dest=/tmp/.buildx-cache        
+        cache-to: type=local,dest=/tmp/.buildx-cache    
 
 
