@@ -1,6 +1,6 @@
-ARG NODE_VERSION=20
+ARG NODE_VERSION=21
 
-FROM node:${NODE_VERSION}-alpine
+FROM node:${NODE_VERSION}-slim
 
 RUN apt-get update && apt-get install -y openssl iputils-ping net-tools
 
