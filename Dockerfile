@@ -1,6 +1,6 @@
 ARG NODE_VERSION=20.13.1
 
-FROM node:${NODE_VERSION}-slim
+FROM node:${NODE_VERSION}-alpine
 
 RUN apt-get update && apt-get install -y openssl iputils-ping net-tools
 
